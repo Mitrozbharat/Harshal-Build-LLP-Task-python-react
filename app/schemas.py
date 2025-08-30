@@ -38,6 +38,8 @@ class EnrollmentBase(BaseModel):
 class EnrollmentCreate(EnrollmentBase):
     pass
 
+
+
 class Enrollment(EnrollmentBase):
     id: int
 

@@ -21,10 +21,15 @@ def get_student(student_id: int, db: Session = Depends(get_db)):
     return student
 
 
-
 @router.post("/", response_model=schemas.Student)
 def create_student(student: schemas.StudentCreate, db: Session = Depends(get_db)):
+    # check if email already exists
+    existing_student = db.query(models.Student).filter(models.Student.email == student.email).first()
+    if existing_student:
+        raise HTTPException(status_code=400, detail="Email is already registered")
+
     db_student = models.Student(name=student.name, email=student.email)
+
     db.add(db_student)
     db.commit()
     db.refresh(db_student)

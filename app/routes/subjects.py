@@ -26,6 +26,12 @@ def get_subject(subject_id: int, db: Session = Depends(get_db)):
 
 @router.put("/{subject_id}", response_model=schemas.Subject)
 def update_subject(subject_id: int, subject: schemas.SubjectCreate, db: Session = Depends(get_db)):
+
+    existing_subject = db.query(models.Subject).filter(models.Subject.title == subject.title).first()
+    if existing_subject:
+        raise HTTPException(status_code=400, detail="Title is already Added")
+
+
     db_subject = db.query(models.Subject).filter(models.Subject.id == subject_id).first()
     if not db_subject:
         raise HTTPException(status_code=404, detail="Subject not found")
@@ -37,6 +43,11 @@ def update_subject(subject_id: int, subject: schemas.SubjectCreate, db: Session 
 
 @router.post("/", response_model=schemas.Subject)
 def create_subject(subject: schemas.SubjectCreate, db: Session = Depends(get_db)):
+
+    existing_subject = db.query(models.Subject).filter(models.Subject.title == subject.title).first()
+    if existing_subject:
+        raise HTTPException(status_code=400, detail="Title is already Added")   
+
     db_subject = models.Subject(title=subject.title, description=subject.description)
     db.add(db_subject)
     db.commit()
