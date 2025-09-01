@@ -37,8 +37,7 @@ enrolled in the subject.
 // then  in this project have python web api and react university client ui 
 // start api  using following cmd : uvicorn app.main:app --reload  t
 // then search the url in any brawsor : port 8000 
-like https://127.167.0.1/8000/docs
-
+like  [ https://127.167.0.1/8000/docs](http://localhost:8000/docs)
 then start the client appu using client 
 
  // goes to university-client folder 
