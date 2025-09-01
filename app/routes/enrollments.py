@@ -78,3 +78,12 @@ def update_enrollment(enrollment_id: int, enrollment: schemas.EnrollmentCreate, 
     db.refresh(db_enrollment)
     return db_enrollment
 
+
+@router.get("/unenrolled", response_model=list[schemas.Student])
+def get_unenrolled_students(db: Session = Depends(get_db)):
+    students = (
+        db.query(models.Student)
+        .filter(~models.Student.enrollments.any())  # students with NO enrollments
+        .all()
+    )
+    return students

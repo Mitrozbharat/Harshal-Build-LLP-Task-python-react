@@ -13,3 +13,5 @@ export const deleteEnrollment = (id) =>
 
 export const UpdateEnrollment = (id) =>
     api.put(`/enrollments/${id}`);
+
+export const getunenrolledStudets = () => api.get('/enrollments/unenrolled');
