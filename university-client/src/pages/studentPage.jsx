@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { createStudent, deleteStudent, getStudents, updateStudent } from "../services/studentService";
-import styles from "./FormTable.module.css";
+import styles from "./FromTable.module.css";
 
 function StudentsPage() {
     const [students, setStudents] = useState([]);

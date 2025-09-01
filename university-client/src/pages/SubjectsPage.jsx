@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { createSubject, deleteSubject, getSubjects, updateSubject } from "../services/subjectService";
-import styles from "./FormTable.module.css";
+import styles from "./FromTable.module.css";
 
 function SubjectsPage() {
     const [subjects, setSubjects] = useState([]);

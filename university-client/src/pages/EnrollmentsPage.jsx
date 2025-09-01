@@ -5,6 +5,7 @@ import {
 import { getStudents } from "../services/studentService";
 import { getSubjects } from "../services/subjectService";
 
+
 function EnrollmentsPage() {
     const [enrollments, setEnrollments] = useState([]);
     const [students, setStudents] = useState([]);
@@ -92,21 +93,52 @@ function EnrollmentsPage() {
     };
 
     return (
-        <div className="container mt-4">
-            <h1 className="mb-4">Enrollments</h1>
+        <div style={{ maxWidth: "1400px", margin: "40px auto", padding: "20px" }}>
+            <div
+                style={{
+                    boxShadow: "0 6px 20px rgba(0,0,0,0.1)",
+                    border: "none",
+                    borderRadius: "16px",
+                    background: "#fff",
+                    padding: "30px",
+                }}
+            >
+                <h1
+                    style={{
+                        marginBottom: "30px",
+                        textAlign: "center",
+                        color: "#0d6efd",
+                        fontWeight: "bold",
+                    }}
+                >
+                    Enrollments
+                </h1>
 
-            {/* Form */}
-            <form className="row g-3 mb-4" onSubmit={handleSubmit}>
-                <div className="row">
-                    <div className="col-md-5 col-lg-6">
+                {/* Form */}
+                <form
+                    onSubmit={handleSubmit}
+                    style={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        gap: "20px",
+                        marginBottom: "30px",
+                        alignItems: "flex-end",
+                    }}
+                >
+                    <div style={{ flex: "1 1 40%" }}>
+                        <label style={{ fontWeight: "600", display: "block", marginBottom: "6px" }}>
+                            Student
+                        </label>
                         <select
-
-                            className=" form-control "
+                            style={{
+                                width: "100%",
+                                padding: "10px",
+                                borderRadius: "8px",
+                                border: "1px solid #ccc",
+                            }}
                             value={form.studentId}
                             name="studentId"
-                            onChange={(e) =>
-                                setForm({ ...form, studentId: e.target.value })
-                            }
+                            onChange={(e) => setForm({ ...form, studentId: e.target.value })}
                             required
                         >
                             <option value="">Select Student</option>
@@ -118,15 +150,20 @@ function EnrollmentsPage() {
                         </select>
                     </div>
 
-                    <div className="col-md-5 col-lg-6">
+                    <div style={{ flex: "1 1 40%" }}>
+                        <label style={{ fontWeight: "600", display: "block", marginBottom: "6px" }}>
+                            Subject
+                        </label>
                         <select
-
-                            className="form-select from-control"
+                            style={{
+                                width: "100%",
+                                padding: "10px",
+                                borderRadius: "8px",
+                                border: "1px solid #ccc",
+                            }}
                             value={form.subjectId}
                             name="subjectId"
-                            onChange={(e) =>
-                                setForm({ ...form, subjectId: e.target.value })
-                            }
+                            onChange={(e) => setForm({ ...form, subjectId: e.target.value })}
                             required
                         >
                             <option value="">Select Subject</option>
@@ -137,67 +174,109 @@ function EnrollmentsPage() {
                             ))}
                         </select>
                     </div>
-                </div>
 
-                <div className="col-md-2 d-grid">
-                    <button className="btn btn-primary" type="submit">
-                        {editingId ? "Update" : "Enroll"}
-                    </button>
-                </div>
-            </form>
+                    <div style={{ flex: "1 1 15%", display: "flex", justifyContent: "center" }}>
+                        <button
+                            type="submit"
+                            style={{
+                                background: "#0d6efd",
+                                color: "#fff",
+                                border: "none",
+                                borderRadius: "8px",
+                                padding: "10px 20px",
+                                fontWeight: "600",
+                                cursor: "pointer",
+                                width: "100%",
+                            }}
+                        >
+                            {editingId ? "Update" : "Enroll"}
+                        </button>
+                    </div>
+                </form>
 
-            {/* Data Table */}
-            <table className="table table-bordered table-striped table-hover">
-                <thead className="table-dark text-center">
-                    <tr>
-                        <th>#</th>
-                        <th>Student</th>
-                        <th>Subject</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {enrollments.length === 0 ? (
-                        <tr>
-                            <td colSpan="4" className="text-center text-muted">
-                                No enrollments found.
-                            </td>
-                        </tr>
-                    ) : (
-                        enrollments.map((e, index) => {
-                            const student = students.find(
-                                (s) => s.id === e.student_id
-                            );
-                            const subject = subjects.find(
-                                (s) => s.id === e.subject_id
-                            );
-
-                            return (
-                                <tr key={e.id}>
-                                    <td className="text-center">{index + 1}</td>
-                                    <td>{student ? student.name : "N/A"}</td>
-                                    <td>{subject ? subject.title : "N/A"}</td>
-                                    <td className="text-center">
-                                        <button
-                                            className="btn btn-sm btn-warning me-2"
-                                            onClick={() => handleUpdate(e)}
-                                        >
-                                            ✏️ Edit
-                                        </button>
-                                        <button
-                                            className="btn btn-sm btn-danger"
-                                            onClick={() => handleDelete(e.id)}
-                                        >
-                                            ❌ Delete
-                                        </button>
+                {/* Data Table */}
+                <div style={{ overflowX: "auto" }}>
+                    <table
+                        style={{
+                            width: "100%",
+                            borderCollapse: "collapse",
+                            borderRadius: "12px",
+                            overflow: "hidden",
+                            boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
+                        }}
+                    >
+                        <thead>
+                            <tr style={{ backgroundColor: "#212529", color: "#fff", textAlign: "center" }}>
+                                <th style={{ padding: "12px" }}>#</th>
+                                <th style={{ padding: "12px" }}>Student</th>
+                                <th style={{ padding: "12px" }}>Subject</th>
+                                <th style={{ padding: "12px" }}>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {enrollments.length === 0 ? (
+                                <tr>
+                                    <td colSpan="4" style={{ textAlign: "center", color: "#6c757d", padding: "20px" }}>
+                                        No enrollments found.
                                     </td>
                                 </tr>
-                            );
-                        })
-                    )}
-                </tbody>
-            </table>
+                            ) : (
+                                enrollments.map((e, index) => {
+                                    const student = students.find((s) => s.id === e.student_id);
+                                    const subject = subjects.find((s) => s.id === e.subject_id);
+
+                                    return (
+                                        <tr
+                                            key={e.id}
+                                            style={{
+                                                borderBottom: "1px solid #dee2e6",
+                                                textAlign: "center",
+                                            }}
+                                        >
+                                            <td style={{ padding: "12px", fontWeight: "600" }}>{index + 1}</td>
+                                            <td style={{ padding: "12px" }}>{student ? student.name : "N/A"}</td>
+                                            <td style={{ padding: "12px" }}>{subject ? subject.title : "N/A"}</td>
+                                            <td style={{ padding: "12px" }}>
+                                                <button
+                                                    onClick={() => handleUpdate(e)}
+                                                    style={{
+                                                        background: "#ffc107",
+                                                        border: "none",
+                                                        padding: "6px 12px",
+                                                        borderRadius: "6px",
+                                                        marginRight: "8px",
+                                                        cursor: "pointer",
+                                                        fontSize: "14px",
+                                                    }}
+                                                >
+                                                    ✏️ Edit
+                                                </button>
+                                                <button
+                                                    onClick={() => handleDelete(e.id)}
+                                                    style={{
+                                                        background: "#dc3545",
+                                                        border: "none",
+                                                        padding: "6px 12px",
+                                                        borderRadius: "6px",
+                                                        cursor: "pointer",
+                                                        fontSize: "14px",
+                                                        color: "#fff",
+                                                    }}
+                                                >
+                                                    ❌ Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    );
+                                })
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
+
+
     );
 }
 

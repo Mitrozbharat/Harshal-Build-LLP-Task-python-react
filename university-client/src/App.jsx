@@ -1,4 +1,4 @@
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Link, Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import EnrollmentsPage from './pages/EnrollmentsPage';
 import StudentsPage from './pages/studentPage';
@@ -16,6 +16,8 @@ function App() {
         </nav>
 
         <Routes>
+          <Route path="/" element={<Navigate to="/students" replace />} />
+
           <Route path="/students" element={<StudentsPage />} />
           <Route path="/subjects" element={<SubjectsPage />} />
           <Route path="/enrollments" element={<EnrollmentsPage />} />
