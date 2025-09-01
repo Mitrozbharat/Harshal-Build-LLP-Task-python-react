@@ -29,3 +29,24 @@ Expose CRUD-style operations for each entity type via the Restful API to support
 enrolments (both completed &amp; uncompleted)
  Reading students as a collection sub-resource of a subject, returning the list of students
 enrolled in the subject.
+
+
+
+//  this task can be how to run  download the project on your system 
+// open with the project in vs code or other editer 
+// then  in this project have python web api and react university client ui 
+// start api  using following cmd : uvicorn app.main:app --reload  t
+// then search the url in any brawsor : port 8000 
+like https://127.167.0.1/8000/docs
+
+then start the client appu using client 
+
+ // goes to university-client folder 
+    cd .. 
+
+ type cmd : npm i 
+ then npm run dev then both projects are run 
+
+thank you
+  
+
